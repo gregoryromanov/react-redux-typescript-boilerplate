@@ -1,0 +1,12 @@
+{
+    "window.zoomLevel": 1,
+    "editor.formatOnSave": true,
+    "typescript.updateImportsOnFileMove.enabled": "never",
+    "editor.tabSize": 2,
+    "editor.cursorSmoothCaretAnimation": true,
+    "files.insertFinalNewline": true,
+    "prettier.singleQuote": true,
+    "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+    "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" }
+  }
+ 

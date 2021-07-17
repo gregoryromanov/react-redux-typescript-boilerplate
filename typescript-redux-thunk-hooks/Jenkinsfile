@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    
+    environment {
+        registry = 'foxerbixer/tic-tac-toe-ui'
+        registry_credentical = 'dockerhub'
+        docker_image = ''
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-ssh-key', url: 'git@github.com:gregoryromanov/tic-tac-toe-ui.git']]])
+            }
+        }
+        
+        stage('Build docker image') {
+            steps {
+                script {
+                   docker_image = docker.build registry
+                }
+            }
+        }
+        
+        stage('Uploading image') {
+            steps {
+                script {
+                    docker.withRegistry( '', registry_credentical ) {
+                    docker_image.push("1.${env.BUILD_NUMBER}")
+                    docker_image.push("latest")
+                    }
+                }
+            }
+        }
+        
+    }
+    
+}
